@@ -34,7 +34,7 @@ jobs:
         run: cat /etc/mysql/my.cnf
       
       - name: Wait for MySQL to be ready
-        run: sleep 30  # Wait for the MySQL container to be ready
+        run: sleep 60  # Wait for the MySQL container to be ready
       
       
       - name: Check MySQL service status
