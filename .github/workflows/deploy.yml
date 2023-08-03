@@ -25,8 +25,8 @@ jobs:
       - name: Configure database credentials
         run: |
           cd lib
-          sed -i 's/root/YOUR_USERNAME/g' DBCredentials.xml
-          sed -i 's/root/YOUR_PASSWORD/g' DBCredentials.xml
+          sed -i 's/root/root/g' DBCredentials.xml
+          sed -i 's/root/root/g' DBCredentials.xml
 
       - name: Run the JAR file
         run: java -jar path/to/InventoryManagement.jar
