@@ -1,0 +1,28 @@
+name: Java Project Deployment
+
+on:
+  push:
+    branches:
+      - main # Adjust this branch name based on your repository's default branch.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+      
+      - name: Set up MySQL
+        uses: mysql/setup-mysql@v2
+      
+      - name: Import SQL dump
+        run: mysql -h localhost -u root -proot < database/your_sql_dump_file.sql
+      
+      - name: Run Java application
+        run: java -jar jar/InventoryManagement.jar
