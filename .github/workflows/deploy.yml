@@ -1,0 +1,33 @@
+name: Java Project Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+          distribution: 'adopt' # Specify the JDK distribution (adopt, openjdk, or temurin)
+
+      - name: Import SQL dump to MySQL
+        run: mysql -u root -proot < SQL/InventoryDB.sql  # Update username and password if needed
+
+      - name: Configure database credentials
+        run: |
+          cd lib
+          sed -i 's/root/YOUR_USERNAME/g' DBCredentials.xml
+          sed -i 's/root/YOUR_PASSWORD/g' DBCredentials.xml
+
+      - name: Run the JAR file
+        run: java -jar path/to/InventoryManagement.jar
+
