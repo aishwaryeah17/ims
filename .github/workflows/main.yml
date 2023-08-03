@@ -29,6 +29,9 @@ jobs:
       - name: Wait for MySQL to be ready
         run: sleep 30  # Wait for the MySQL container to be ready
 
+      - name: Check MySQL service status
+        run: mysqladmin ping -h 127.0.0.1 -u root -proot
+
       - name: Import SQL dump
         run: mysql -h 127.0.0.1 -u root -proot < SQL/InventoryDB.sql
 
