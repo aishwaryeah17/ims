@@ -30,7 +30,7 @@ jobs:
         run: sleep 15  # Wait for the MySQL container to be ready
 
       - name: Import SQL dump
-        run: mysql -h 127.0.0.1 -u root -proot < database/your_sql_dump_file.sql
+        run: mysql -h 127.0.0.1 -u root -proot < SQL/InventoryDB.sql
 
       - name: Run Java application
         run: java -jar jar/InventoryManagement.jar
