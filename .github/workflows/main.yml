@@ -3,7 +3,7 @@ name: Java Project Deployment
 on:
   push:
     branches:
-      - main # Adjust this branch name based on your repository's default branch.
+      - master # Adjust this branch name based on your repository's default branch.
 
 jobs:
   deploy:
