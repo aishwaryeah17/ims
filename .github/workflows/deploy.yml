@@ -1,4 +1,4 @@
-name: Java Project Deployment
+name: Deployment
 
 on:
   push:
