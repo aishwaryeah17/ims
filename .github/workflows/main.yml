@@ -26,9 +26,17 @@ jobs:
           java-version: 16
           distribution: 'adopt'
 
+
+      - name: Print Network Configuration
+        run: ip a
+
+      - name: Print MySQL Configuration
+        run: cat /etc/mysql/my.cnf
+      
       - name: Wait for MySQL to be ready
         run: sleep 30  # Wait for the MySQL container to be ready
-
+      
+      
       - name: Check MySQL service status
         run: mysqladmin ping -h 127.0.0.1 -u root -proot
 
