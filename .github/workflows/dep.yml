@@ -1,4 +1,4 @@
-name: Java Project Deployment
+name: Java Deployment
 
 on:
   push:
@@ -20,10 +20,12 @@ jobs:
           distribution: 'adopt'
 
       - name: setup-mysql
-      - uses: shogo82148/actions-setup-mysql@v1
+        uses: shogo82148/actions-setup-mysql@v1
         with:
           mysql-version: "8.0"
-      - run: mysql -uroot -e 'SELECT version()'
+
+      - name: mysql
+        run: mysql -uadmin -e 'SELECT version()'
       
       - name: Print Network Configuration
         run: ip a
@@ -36,7 +38,7 @@ jobs:
       
       
       - name: Check MySQL service status
-        run: mysqladmin ping -h 127.0.0.1 -u root -proot
+        run: mysqladmin ping -h 127.0.0.1 -u admin -p
 
       - name: Import SQL dump
         run: mysql -h 127.0.0.1 -u root -proot < SQL/InventoryDB.sql
