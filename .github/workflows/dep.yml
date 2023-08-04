@@ -24,6 +24,7 @@ jobs:
         with:
           mysql-version: "8.0"
 
+
       - name: mysql
         run: sudo mysql -uadmin -e 'SELECT version()'
       
