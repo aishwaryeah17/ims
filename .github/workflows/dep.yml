@@ -21,8 +21,7 @@ jobs:
 
       - name: setup-mysql
         uses: shogo82148/actions-setup-mysql@v1
-        env:
-          ImageOS: /home/aishwarya/actionrunner/_work/_actions/shogo82148/actions-setup-mysql/v1/lib/installer
+        
         with:
           mysql-version: "8.0"
 
