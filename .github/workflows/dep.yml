@@ -25,7 +25,7 @@ jobs:
           mysql-version: "8.0"
 
       - name: mysql
-        run: mysql -uadmin -e 'SELECT version()'
+        run: sudo mysql -uadmin -e 'SELECT version()'
       
       - name: Print Network Configuration
         run: ip a
