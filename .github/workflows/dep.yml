@@ -1,0 +1,45 @@
+name: Java Project Deployment
+
+on:
+  push:
+    branches:
+      - master # Adjust this branch name based on your repository's default branch.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+          distribution: 'adopt'
+
+      - uses: actions/checkout@v3
+      - uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: "8.0"
+      - run: mysql -uroot -e 'SELECT version()'
+      
+      - name: Print Network Configuration
+        run: ip a
+
+      - name: Print MySQL Configuration
+        run: cat /etc/mysql/my.cnf
+      
+      - name: Wait for MySQL to be ready
+        run: sleep 60  # Wait for the MySQL container to be ready
+      
+      
+      - name: Check MySQL service status
+        run: mysqladmin ping -h 127.0.0.1 -u root -proot
+
+      - name: Import SQL dump
+        run: mysql -h 127.0.0.1 -u root -proot < SQL/InventoryDB.sql
+
+      - name: Run Java application
+        run: java -jar jar/InventoryManagement.jar
